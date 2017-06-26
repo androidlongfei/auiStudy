@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <link rel="stylesheet" href="test.css">
+  <style media="screen">
+    .aui-bar-btn {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="aui-bar-btn">
+    <div class="aui-bar-btn-item">
+      item
+    </div>
+    <div class="aui-bar-btn-item">
+      item
+    </div>
+    <div class="aui-bar-btn-item">
+      item
+    </div>
+  </div>
+
+  <div class="aui-bar aui-bar-btn" style="width:80%;">
+    <div class="aui-bar-btn-item">Item</div>
+    <div class="aui-bar-btn-item">Item</div>
+    <div class="aui-bar-btn-item">Item</div>
+  </div>
+
+  <div class="aui-bar aui-bar-btn" style="width:80%;" type="count" id="demo">
+    <div class="aui-bar-btn-item aui-font-size-20">
+      <i class="aui-iconfont aui-icon-minus"></i>
+    </div>
+    <div class="aui-bar-btn-item">
+      <input type="number" class="aui-input aui-text-center" id="count" value="1">
+    </div>
+    <div class="aui-bar-btn-item aui-font-size-20">
+      <i class="aui-iconfont aui-icon-plus"></i>
+    </div>
+  </div>
+
+</body>
+<script src="../lib/underscore.js" charset="utf-8"></script>
+<script src="my-tab.js" charset="utf-8"></script>
+<script charset="utf-8">
+  var tabs = document.querySelectorAll(".aui-bar-btn");
+  _.each(tabs, function(tab) {
+    var myTab = new MyTab({
+      element: tab,
+      repeatClick: true
+    }, function(obj) {
+      console.log('dom', obj);
+      var el = obj.dom.parentNode.getAttribute("type")
+      if (el && el == 'count') {
+        var count = parseInt(document.getElementById("count").value);
+        if (obj.index == 1) {
+          // 减法
+          document.getElementById("count").value = --count
+        } else if (obj.index == 3) {
+          //加法
+          document.getElementById("count").value = ++count
+        }
+      }
+    });
+    console.log('myTab', myTab);
+  });
+</script>
+
+</html>

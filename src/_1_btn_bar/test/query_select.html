@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>querySelector和querySelectorAll使用</title>
+  <style media="screen">
+    .items {
+      border: 1px solid red;
+      margin-bottom: 20px;
+    }
+
+    .item {
+      border-top: 1px solid red;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .item_active {
+      color: white;
+      background-color: red;
+    }
+
+    .item:first-child {
+      border-top: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="item1" class="items">
+    <div class="item">
+      demo1
+    </div>
+    <div class="item">
+      demo2
+    </div>
+    <div class="item">
+      demo3
+    </div>
+    <div class="item">
+      demo4
+    </div>
+  </div>
+
+  <div class="items">
+    <div class="item">
+      test1
+    </div>
+    <div class="item">
+      test2
+    </div>
+    <div class="item">
+      test3
+    </div>
+  </div>
+</body>
+
+<script charset="utf-8">
+  var item1 = document.getElementById("item1");
+  console.log("itme1", item1);
+  var items = item1.querySelectorAll(".item");
+  console.log("items", items);
+  for (var i = 0; i < items.length; i++) {
+    items[i].onclick = click1;
+  }
+  var item = item1.querySelector(".item");
+  console.log("item", item);
+
+  function click1() {
+    var lastChoiceItem = this.parentNode.querySelector(".item_active");
+    console.log('lastChoiceItem', lastChoiceItem);
+    if (lastChoiceItem) {
+      lastChoiceItem.classList.remove("item_active");
+    }
+    console.log('this.classList', this.classList);
+    this.classList.add("item_active");
+  }
+
+  function click() {
+    var items = this.parentNode.querySelectorAll(".item");
+    console.log('clear items', items);
+    for (var i = 0; i < items.length; i++) {
+      var item = items[i];
+      if (item.classList.contains("item_active")) {
+        item.classList.remove("item_active");
+      }
+    }
+    this.classList.add("item_active");
+  }
+</script>
+
+</html>
